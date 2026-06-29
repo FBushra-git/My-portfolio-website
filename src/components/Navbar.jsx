@@ -1,3 +1,5 @@
+import { Moon, Sun } from "lucide-react";
+
 const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
@@ -7,7 +9,9 @@ const navItems = [
 ];
 
 export default function Navbar({ theme, onThemeToggle }) {
-  const nextThemeLabel = theme === "light" ? "Dark" : "Light";
+  const isLight = theme === "light";
+  const nextThemeLabel = isLight ? "Dark" : "Light";
+  const ThemeIcon = isLight ? Moon : Sun;
 
   return (
     <nav className="navbar" aria-label="Primary navigation">
@@ -24,8 +28,10 @@ export default function Navbar({ theme, onThemeToggle }) {
         type="button"
         onClick={onThemeToggle}
         aria-label={`Switch to ${nextThemeLabel.toLowerCase()} mode`}
+        title={`Switch to ${nextThemeLabel.toLowerCase()} mode`}
       >
-        {nextThemeLabel}
+        <ThemeIcon size={17} strokeWidth={1.8} aria-hidden="true" />
+        <span>{nextThemeLabel}</span>
       </button>
     </nav>
   );
