@@ -2,17 +2,27 @@
 
 import { motion } from "framer-motion";
 import {
-  BookOpenCheck,
+  Blocks,
+  Bot,
+  Braces,
+  Cloud,
   Code2,
   Database,
+  FileJson,
+  GitBranch,
   KeyRound,
   LayoutDashboard,
   MessageCircle,
-  Paintbrush,
+  Network,
+  Package,
+  Palette,
+  PanelsTopLeft,
   ServerCog,
   ShieldCheck,
   Sparkles,
+  TerminalSquare,
   Users,
+  Wrench,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -21,19 +31,41 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 },
 };
 
+const featuredSkills = {
+  frontend: [
+    { name: "React", type: "Frontend", Icon: Braces },
+    { name: "Next.js", type: "Framework", Icon: PanelsTopLeft },
+    { name: "Tailwind CSS", type: "Styling", Icon: Palette },
+    { name: "Framer Motion", type: "Animation", Icon: Sparkles },
+  ],
+  backend: [
+    { name: "MongoDB", type: "Database", Icon: Database },
+    { name: "Express.js", type: "Backend", Icon: ServerCog },
+    { name: "Node.js", type: "Runtime", Icon: TerminalSquare },
+    { name: "Better Auth", type: "Authentication", Icon: ShieldCheck },
+  ],
+  soft: [
+    { name: "Communication", type: "Collaboration", Icon: MessageCircle },
+    { name: "Problem-Solving", type: "Thinking", Icon: Blocks },
+    { name: "Teamwork", type: "People", Icon: Users },
+    { name: "AI Automation", type: "Currently Learning", Icon: Bot },
+  ],
+};
+
 const tabs = [
   {
     id: "frontend",
     label: "Frontend",
     Icon: LayoutDashboard,
     DetailIcon: Code2,
-    title: "Frontend Development",
+    title: "Frontend Technologies I Work With",
     description:
-      "I build responsive, clean, and user-friendly interfaces with reusable components and modern frontend tools. I care about spacing, readability, responsiveness, and smooth user flows.",
+      "I build responsive interfaces with React and Next.js, then polish the experience with modern styling systems, animation, and component libraries.",
     groups: [
-      { title: "Core", items: ["HTML", "CSS", "JavaScript"] },
-      { title: "Frameworks", items: ["React", "Next.js"] },
-      { title: "UI Focus", items: ["Responsive Layouts", "Reusable Components", "Clean Visual UI", "Interactive User Flows"] },
+      { title: "Core Web", items: ["HTML5", "CSS3", "JavaScript", "Responsive Web Design"] },
+      { title: "Frameworks & Libraries", items: ["React", "Next.js", "Framer Motion"] },
+      { title: "UI & Styling", items: ["CSS", "Tailwind CSS", "Hero UI", "DaisyUI"] },
+      { title: "Frontend Integration", items: ["RESTful APIs", "JSON", "API Integration"] },
     ],
   },
   {
@@ -41,13 +73,14 @@ const tabs = [
     label: "Backend",
     Icon: ServerCog,
     DetailIcon: ShieldCheck,
-    title: "Backend, Database & Authentication",
+    title: "Backend, Database & API Skills",
     description:
-      "I work with server logic, API routes, MongoDB data flows, and authentication so applications can handle real user actions safely and clearly.",
+      "I work with server-side JavaScript, Express APIs, MongoDB databases, authentication flows, and practical tools for testing and deployment.",
     groups: [
-      { title: "Runtime & Server", items: ["Node.js", "Express.js", "REST APIs"] },
-      { title: "Database", items: ["MongoDB", "Data Modeling", "CRUD Operations"] },
-      { title: "Authentication", items: ["JWT", "Better Auth", "Protected Routes", "User Sessions"] },
+      { title: "Backend", items: ["Node.js", "Express.js", "RESTful APIs", "API Design"] },
+      { title: "Database", items: ["MongoDB", "Database Design", "CRUD Operations"] },
+      { title: "Authentication", items: ["Better Auth", "JWT", "Protected Routes", "User Sessions"] },
+      { title: "Testing & API Tools", items: ["Thunder Client", "JSON", "API Integration"] },
     ],
   },
   {
@@ -55,21 +88,30 @@ const tabs = [
     label: "Soft Skills",
     Icon: MessageCircle,
     DetailIcon: Users,
-    title: "Soft Skills, Academic Base & Creative Strengths",
+    title: "Professional, Academic & Creative Strengths",
     description:
-      "Along with technical skills, I bring communication, consistency, academic CS knowledge, and creative thinking from painting and story writing.",
+      "Along with web development, I bring CSE fundamentals, strong learning habits, creative thinking, and communication skills that help me work better in real projects.",
     groups: [
-      { title: "Working Style", items: ["Communication", "Problem Solving", "Self-learning", "Attention to Detail", "Time Management"] },
-      { title: "Academic Knowledge", items: ["C", "C++", "Java (Learning)", "Structured Programming", "Data Structures", "Algorithms", "OOP"] },
-      { title: "Creative Skills", items: ["Painting", "Story Writing", "Creative Thinking", "Visual Balance", "Presentation Sense"] },
+      { title: "Soft Skills", items: ["Communication", "Problem-Solving", "Adaptability", "Teamwork", "Emotional Intelligence"] },
+      { title: "Programming Languages", items: ["C", "C++", "JavaScript", "Java"] },
+      { title: "Academic Knowledge", items: ["Data Structures", "Algorithms", "Structured Programming", "Object-Oriented Programming"] },
+      { title: "DevOps, Tools & Version Control", items: ["Git", "GitHub", "Vercel", "Netlify", "Vite", "npm", "VS Code"] },
+      { title: "Creative & Currently Learning", items: ["Painting", "Story Writing", "AI Automation"] },
     ],
   },
 ];
+
+const toolIconMap = {
+  frontend: Network,
+  backend: KeyRound,
+  soft: Cloud,
+};
 
 export default function Skills() {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
   const activeContent = tabs.find((tab) => tab.id === activeTab) ?? tabs[0];
   const DetailIcon = activeContent.DetailIcon;
+  const ToolIcon = toolIconMap[activeContent.id] ?? Wrench;
 
   return (
     <motion.section
@@ -81,10 +123,10 @@ export default function Skills() {
       viewport={{ once: true, amount: 0.16 }}
     >
       <motion.div className="sectionIntro skillsIntro" variants={fadeUp} transition={{ duration: 0.7, ease: "easeOut" }}>
-        <p className="eyebrow">Skills</p>
-        <h2 id="skills-title">A practical skill set with technical depth and creative range.</h2>
+        <p className="eyebrow">My Skills</p>
+        <h2 id="skills-title">Technologies and strengths I work with.</h2>
         <p>
-          Explore my skills by category: frontend, backend, and soft skills with academic and creative strengths included where they belong.
+          A recruiter-friendly overview of my frontend, backend, academic, tool-based, and soft-skill strengths without self-rating percentages.
         </p>
       </motion.div>
 
@@ -108,7 +150,7 @@ export default function Skills() {
         </div>
 
         <motion.div
-          className="skillsTabPanel compactTabPanel"
+          className="skillsTabPanel recruiterSkillPanel"
           id={`skills-panel-${activeContent.id}`}
           role="tabpanel"
           aria-labelledby={`skills-tab-${activeContent.id}`}
@@ -125,18 +167,36 @@ export default function Skills() {
             <p>{activeContent.description}</p>
           </div>
 
-          <div className="tabSkillGroups">
+          <div className="featuredSkillGrid" aria-label={`${activeContent.label} featured skills`}>
+            {featuredSkills[activeContent.id].map(({ name, type, Icon }) => (
+              <motion.article
+                className="featuredSkillCard"
+                key={name}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.28, ease: "easeOut" }}
+              >
+                <div className="featuredSkillIcon">
+                  <Icon size={30} strokeWidth={1.7} aria-hidden="true" />
+                </div>
+                <strong>{name}</strong>
+                <span>{type}</span>
+              </motion.article>
+            ))}
+          </div>
+
+          <div className="tabSkillGroups recruiterSkillGroups">
             {activeContent.groups.map((group) => (
               <div className="tabSkillGroup" key={group.title}>
                 <div className="miniSkillHeading">
-                  <Sparkles size={15} strokeWidth={1.8} aria-hidden="true" />
+                  <ToolIcon size={15} strokeWidth={1.8} aria-hidden="true" />
                   <span>{group.title}</span>
                 </div>
                 <motion.div
                   className="tabSkillCloud"
                   initial="hidden"
                   animate="visible"
-                  variants={{ visible: { transition: { staggerChildren: 0.04 } } }}
+                  variants={{ visible: { transition: { staggerChildren: 0.035 } } }}
                 >
                   {group.items.map((skill) => (
                     <motion.span
