@@ -1786,3 +1786,164 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+.projectsSection .sectionIntro {
+  max-width: 820px;
+}
+
+.projectCard {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  box-shadow: 0 22px 62px rgba(24, 21, 20, 0.1);
+}
+
+.projectPreview {
+  min-height: 190px;
+  background:
+    radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--accent-soft) 34%, transparent), transparent 38%),
+    radial-gradient(circle at 85% 82%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 36%),
+    color-mix(in srgb, var(--surface-strong) 76%, transparent);
+}
+
+.projectCardBody {
+  background: color-mix(in srgb, var(--surface) 68%, transparent);
+}
+
+.projectCardBody h3,
+.projectPreview strong {
+  color: var(--text);
+}
+
+.projectCardBody p {
+  color: var(--muted);
+}
+
+.detailsButton,
+.repoButton {
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface-strong) 48%, transparent);
+}
+
+.themeTest.light .detailsButton {
+  background: #181514;
+  border-color: #181514;
+  color: #ffffff;
+}
+
+.themeTest.light .repoButton {
+  background: rgba(255, 250, 244, 0.74);
+}
+
+.themeTest {
+  background-size: 130% 130%;
+  animation: pageGradientDrift 18s ease-in-out infinite alternate;
+}
+
+.motionCard,
+.projectCard,
+.skillGroupCard,
+.storyCard,
+.aboutPanel,
+.aboutStatCard,
+.featuredSkillCard,
+.tabSkillGroup {
+  position: relative;
+  overflow: hidden;
+}
+
+.motionCard::before,
+.projectCard::before,
+.featuredSkillCard::before,
+.tabSkillGroup::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 0%, color-mix(in srgb, var(--accent) 16%, transparent) 42%, transparent 64%);
+  opacity: 0;
+  transform: translateX(-70%);
+  transition: opacity 220ms ease, transform 680ms ease;
+  pointer-events: none;
+}
+
+.motionCard:hover::before,
+.projectCard:hover::before,
+.featuredSkillCard:hover::before,
+.tabSkillGroup:hover::before {
+  opacity: 1;
+  transform: translateX(70%);
+}
+
+.animatedPreview {
+  background-size: 140% 140%;
+  animation: previewGradientDrift 9s ease-in-out infinite alternate;
+}
+
+.magneticButton,
+.primaryBtn,
+.ghostBtn,
+.detailsButton,
+.repoButton,
+.themeToggle,
+.skillsTabButton {
+  will-change: transform;
+}
+
+.magneticButton:hover,
+.primaryBtn:hover,
+.ghostBtn:hover,
+.detailsButton:hover,
+.repoButton:hover,
+.themeToggle:hover,
+.skillsTabButton:hover {
+  transform: translateY(-3px) scale(1.015);
+}
+
+.navbar {
+  animation: navbarDrop 520ms ease both;
+}
+
+@keyframes pageGradientDrift {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 100% 70%;
+  }
+}
+
+@keyframes previewGradientDrift {
+  0% {
+    background-position: 0% 20%;
+  }
+
+  100% {
+    background-position: 100% 80%;
+  }
+}
+
+@keyframes navbarDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .themeTest,
+  .animatedPreview,
+  .navbar {
+    animation: none;
+  }
+
+  .motionCard::before,
+  .projectCard::before,
+  .featuredSkillCard::before,
+  .tabSkillGroup::before {
+    display: none;
+  }
+}
