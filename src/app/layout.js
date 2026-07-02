@@ -1,4 +1,5 @@
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const headingFont = Cormorant_Garamond({
@@ -21,7 +22,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${headingFont.variable} ${bodyFont.variable}`}>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

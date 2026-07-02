@@ -1,12 +1,21 @@
 import { ArrowUpRight, Code2, ExternalLink } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function ProjectCard({ project, index, className = "" }) {
+  const previewImage = project.screenshot || project.screenshots?.[0];
+
   return (
     <article className={`projectCard ${className}`}>
-      <div className="projectPreview" aria-label={`${project.name} preview`}>
-        <span>{String(index + 1).padStart(2, "0")}</span>
-        <strong>{project.imageLabel}</strong>
+      <div className={`projectPreview${previewImage ? " imagePreview" : ""}`} aria-label={`${project.name} preview`}>
+        {previewImage ? (
+          <Image src={previewImage} alt={`${project.name} preview`} width={720} height={480} />
+        ) : (
+          <>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{project.imageLabel}</strong>
+          </>
+        )}
       </div>
       <div className="projectCardBody">
         <h3>{project.name}</h3>

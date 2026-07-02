@@ -1,5 +1,6 @@
 import { ArrowLeft, Code2, ExternalLink } from "lucide-react";
 import Image from "next/image";
+import ProjectLivePreview from "@/components/ProjectLivePreview";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "../data";
@@ -25,32 +26,73 @@ export async function generateMetadata({ params }) {
 export default async function ProjectDetails({ params }) {
   const { slug } = await params;
   const project = getProject(slug);
-  const screenshots = project?.screenshots ?? [];
 
   if (!project) {
     notFound();
   }
 
+  const screenshots = project.screenshots ?? [];
+
   return (
     <main className="projectDetailsPage">
       <nav className="projectDetailsNav">
         <Link className="brand" href="/">Bushra</Link>
-        <Link className="backLink" href="/#projects">
-          <ArrowLeft size={17} strokeWidth={1.8} aria-hidden="true" />
-          Projects
-        </Link>
+        <div className="projectNavActions">
+          <Link className="backLink" href="/#projects">
+            <ArrowLeft size={17} strokeWidth={1.8} aria-hidden="true" />
+            Projects
+          </Link>
+        </div>
       </nav>
 
-      <section className="sectionBlock projectDetailsHero" aria-labelledby="project-title">
-        <div className="projectDetailsPreview">
-          <span>{project.imageLabel}</span>
-          <strong>{project.name}</strong>
+      <section className="projectProductDetail" aria-labelledby="project-title">
+        <div className="projectProductMedia">
+          <div className="projectProductPreview interactiveProjectPreview">
+            {project.liveLink !== "#" ? (
+              <ProjectLivePreview projectName={project.name} liveLink={project.liveLink} />
+            ) : project.screenshot ? (
+              <Image src={project.screenshot} alt={`${project.name} website preview`} width={1440} height={4200} priority />
+            ) : (
+              <div className="projectScreenshotPlaceholder">
+                <span>{project.imageLabel}</span>
+                <strong>Preview coming soon</strong>
+              </div>
+            )}
+          </div>
+
+          {screenshots.length > 0 && (
+            <div className="projectProductThumbs" aria-label={`${project.name} screenshots`}>
+              {screenshots.map((screenshot, index) => (
+                <div className="projectProductThumb" key={screenshot}>
+                  <Image src={screenshot} alt={`${project.name} screenshot ${index + 1}`} width={240} height={170} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-        <div className="projectDetailsCopy">
-          <p className="eyebrow">Project Overview</p>
-          <h1 id="project-title">{project.name}</h1>
-          <p>{project.description}</p>
-          <div className="projectDetailsActions">
+
+        <aside className="projectProductInfo">
+          <p className="projectBreadcrumb">Home / Projects / {project.name}</p>
+          <div className="projectTitleLine">
+            <div>
+              <p className="eyebrow">{project.imageLabel}</p>
+              <h1 id="project-title">{project.name}</h1>
+            </div>
+            {project.liveLink !== "#" && <span>Live</span>}
+          </div>
+
+          <p className="projectProductDescription">{project.description}</p>
+
+          <div className="projectQuickFacts">
+            <span>Role</span>
+            <strong>Fullstack Developer</strong>
+            <span>Project Type</span>
+            <strong>{project.imageLabel}</strong>
+            <span>Stack</span>
+            <strong>{project.stack.slice(0, 3).join(", ")}</strong>
+          </div>
+
+          <div className="projectDetailsActions productDetailActions">
             {project.liveLink !== "#" && (
               <a className="primaryBtn" href={project.liveLink} target="_blank" rel="noreferrer">
                 <ExternalLink size={18} strokeWidth={1.8} aria-hidden="true" />
@@ -62,51 +104,13 @@ export default async function ProjectDetails({ params }) {
               Repository
             </a>
           </div>
-        </div>
+
+          <div className="projectRightPanel">
+            <h2>Project Focus</h2>
+            <p>{project.purpose ?? project.shortDescription}</p>
+          </div>
+        </aside>
       </section>
-
-      <section className="sectionBlock projectScreenshotSection" aria-labelledby="project-screenshot-title">
-        <div className="sectionIntro">
-          <p className="eyebrow">Website Screenshots</p>
-          <h2 id="project-screenshot-title">Screens from the project interface.</h2>
-          <p>The long preview shows the full page, and the gallery highlights important screens from the website.</p>
-        </div>
-
-        <div className="projectScreenshotFrame projectLongScreenshotFrame">
-          {project.screenshot ? (
-            <Image src={project.screenshot} alt={`${project.name} long website screenshot`} width={1440} height={4200} />
-          ) : (
-            <div className="projectScreenshotPlaceholder">
-              <span>{project.name}</span>
-              <strong>Long preview coming soon</strong>
-            </div>
-          )}
-        </div>
-
-        {screenshots.length > 0 && (
-          <div className="projectScreenshotGrid" aria-label={`${project.name} screenshot gallery`}>
-            {screenshots.map((screenshot, index) => (
-              <figure className="projectScreenshotCard" key={screenshot}>
-                <Image src={screenshot} alt={`${project.name} screenshot ${index + 1}`} width={900} height={620} />
-                <figcaption>{String(index + 1).padStart(2, "0")}</figcaption>
-              </figure>
-            ))}
-          </div>
-        )}
-      </section>
-
-      {project.liveLink !== "#" && (
-        <section className="sectionBlock livePreviewSection" aria-labelledby="project-preview-title">
-          <div className="sectionIntro">
-            <p className="eyebrow">Live Preview</p>
-            <h2 id="project-preview-title">Explore the project without leaving the portfolio.</h2>
-            <p>If the preview does not load because of browser security settings, use the Live Project button above.</p>
-          </div>
-          <div className="livePreviewFrame">
-            <iframe src={project.liveLink} title={`${project.name} live preview`} loading="lazy" />
-          </div>
-        </section>
-      )}
 
       <section className="sectionBlock projectInfoSection" aria-labelledby="project-info-title">
         <div className="sectionIntro">
@@ -165,3 +169,12 @@ export default async function ProjectDetails({ params }) {
     </main>
   );
 }
+
+
+
+
+
+
+
+
+

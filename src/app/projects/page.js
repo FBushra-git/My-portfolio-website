@@ -1,4 +1,4 @@
-﻿import { ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { projects } from "./data";
 import ProjectCard from "@/components/ProjectCard";
@@ -13,10 +13,12 @@ export default function ProjectsPage() {
     <main className="projectDetailsPage">
       <nav className="projectDetailsNav">
         <Link className="brand" href="/">Bushra</Link>
-        <Link className="backLink" href="/#projects">
-          <ArrowLeft size={17} strokeWidth={1.8} aria-hidden="true" />
-          Home
-        </Link>
+        <div className="projectNavActions">
+          <Link className="backLink" href="/#projects">
+            <ArrowLeft size={17} strokeWidth={1.8} aria-hidden="true" />
+            Home
+          </Link>
+        </div>
       </nav>
 
       <section className="sectionBlock allProjectsSection">
@@ -37,3 +39,5 @@ export default function ProjectsPage() {
     </main>
   );
 }
+
+

@@ -9,7 +9,7 @@ import ProjectCard from "@/components/ProjectCard";
 export default function Projects() {
   const [startIndex, setStartIndex] = useState(0);
   const visibleProjects = useMemo(() => {
-    return Array.from({ length: Math.min(3, projects.length) }, (_, offset) => {
+    return Array.from({ length: Math.min(4, projects.length) }, (_, offset) => {
       const projectIndex = (startIndex + offset) % projects.length;
       return { project: projects[projectIndex], index: projectIndex };
     });
@@ -30,7 +30,7 @@ export default function Projects() {
           <p className="eyebrow">Projects</p>
           <h2 id="projects-title">Selected projects from my web development journey.</h2>
           <p>
-            Three highlighted projects are shown here. Visit the full projects page to explore everything with details, live previews, and client-side repositories.
+            Four highlighted projects are shown here. Visit the full projects page to explore everything with details, live previews, and client-side repositories.
           </p>
         </div>
 
@@ -56,3 +56,4 @@ export default function Projects() {
     </section>
   );
 }
+

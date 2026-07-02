@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Code2, Download, Mail, Send, SquareUserRound } from "lucide-react";
@@ -89,4 +91,5 @@ export default function Banner() {
     </section>
   );
 }
+
 
