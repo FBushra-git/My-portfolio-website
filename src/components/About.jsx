@@ -83,7 +83,7 @@ export default function About() {
         <p className="eyebrow">About Me</p>
         <h2 id="about-title">A CSE student building full stack web applications with care.</h2>
         <p>
-          I am Bushra, a MENN stack developer and Computer Science and Engineering student. I enjoy learning both the visual side of web development and the logic that powers real applications.
+          I am Bushra, a MERN stack developer and Computer Science and Engineering student. I enjoy learning both the visual side of web development and the logic that powers real applications.
         </p>
       </motion.div>
 

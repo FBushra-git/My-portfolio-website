@@ -2900,3 +2900,93 @@ footer a {
     flex: 1;
   }
 }
+
+/* Project portfolio content refinements */
+.projectCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectPreview.imagePreview {
+  aspect-ratio: 16 / 10;
+  min-height: 0;
+}
+
+.projectPreview.imagePreview img {
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.projectCardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 17px 18px 18px;
+}
+
+.projectCardBody p {
+  display: -webkit-box;
+  min-height: 3em;
+  margin-top: 8px;
+  overflow: hidden;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.projectStackPreview {
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.projectStackPreview span {
+  padding: 6px 8px;
+  font-size: 0.68rem;
+}
+
+.projectActions {
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 15px;
+}
+
+.projectActions .detailsButton,
+.projectActions .repoButton {
+  min-height: 40px;
+}
+
+.projectActions .repoButton {
+  width: 40px;
+}
+
+.projectProductThumbs {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.projectProductThumb {
+  aspect-ratio: 16 / 10;
+}
+
+.projectScreenshotSection {
+  padding-top: 58px;
+}
+
+.projectScreenshotSection .sectionIntro {
+  margin-bottom: 24px;
+}
+
+.projectScreenshotCard img {
+  aspect-ratio: 16 / 10;
+  height: auto;
+  min-height: 0;
+  object-fit: cover;
+  object-position: top center;
+}
+
+@media (max-width: 760px) {
+  .projectScreenshotCard img {
+    min-height: 0;
+  }
+}

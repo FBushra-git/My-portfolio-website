@@ -21,7 +21,7 @@ export default function Banner() {
   return (
     <section id="home" className="banner" aria-labelledby="banner-title">
       <div className="bannerText">
-        <p className="eyebrow">MENN Stack Developer</p>
+        <p className="eyebrow">MERN Stack Developer</p>
         <motion.h1
           id="banner-title"
           className="typingName"

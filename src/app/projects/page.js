@@ -26,7 +26,7 @@ export default function ProjectsPage() {
           <p className="eyebrow">All Projects</p>
           <h1>Every project in one place.</h1>
           <p>
-            Browse my project collection with live project links, client-side repositories, details, challenges, and future improvement plans.
+            Browse my project collection with live project links, client and server repositories, details, challenges, and future improvement plans.
           </p>
         </div>
 

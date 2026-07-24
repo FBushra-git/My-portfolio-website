@@ -1,4 +1,4 @@
-import { ArrowLeft, Code2, ExternalLink } from "lucide-react";
+import { ArrowLeft, Code2, ExternalLink, Server } from "lucide-react";
 import Image from "next/image";
 import ProjectLivePreview from "@/components/ProjectLivePreview";
 import Link from "next/link";
@@ -32,6 +32,7 @@ export default async function ProjectDetails({ params }) {
   }
 
   const screenshots = project.screenshots ?? [];
+  const screenshotLabels = project.screenshotLabels ?? [];
 
   return (
     <main className="projectDetailsPage">
@@ -64,7 +65,7 @@ export default async function ProjectDetails({ params }) {
             <div className="projectProductThumbs" aria-label={`${project.name} screenshots`}>
               {screenshots.map((screenshot, index) => (
                 <div className="projectProductThumb" key={screenshot}>
-                  <Image src={screenshot} alt={`${project.name} screenshot ${index + 1}`} width={240} height={170} />
+                  <Image src={screenshot} alt={project.name + " " + (screenshotLabels[index] ?? "screenshot " + (index + 1))} width={240} height={170} />
                 </div>
               ))}
             </div>
@@ -89,7 +90,7 @@ export default async function ProjectDetails({ params }) {
             <span>Project Type</span>
             <strong>{project.imageLabel}</strong>
             <span>Stack</span>
-            <strong>{project.stack.slice(0, 3).join(", ")}</strong>
+            <strong>{project.stack.slice(0, 4).join(", ")}</strong>
           </div>
 
           <div className="projectDetailsActions productDetailActions">
@@ -101,8 +102,14 @@ export default async function ProjectDetails({ params }) {
             )}
             <a className="ghostBtn" href={project.githubLink} target="_blank" rel="noreferrer">
               <Code2 size={18} strokeWidth={1.8} aria-hidden="true" />
-              Repository
+              Client Repository
             </a>
+            {project.serverGithubLink && (
+              <a className="ghostBtn" href={project.serverGithubLink} target="_blank" rel="noreferrer">
+                <Server size={18} strokeWidth={1.8} aria-hidden="true" />
+                Server Repository
+              </a>
+            )}
           </div>
 
           <div className="projectRightPanel">
@@ -111,6 +118,30 @@ export default async function ProjectDetails({ params }) {
           </div>
         </aside>
       </section>
+
+      {screenshots.length > 0 && (
+        <section className="sectionBlock projectScreenshotSection" aria-labelledby="project-screenshots-title">
+          <div className="sectionIntro">
+            <p className="eyebrow">Live Site Screenshots</p>
+            <h2 id="project-screenshots-title">A closer look at the project experience.</h2>
+            <p>Captured directly from the deployed website to show the real interface across key sections.</p>
+          </div>
+
+          <div className="projectScreenshotGrid">
+            {screenshots.map((screenshot, index) => (
+              <figure className="projectScreenshotCard" key={screenshot}>
+                <Image
+                  src={screenshot}
+                  alt={project.name + " " + (screenshotLabels[index] ?? "screenshot " + (index + 1))}
+                  width={1440}
+                  height={1000}
+                />
+                <figcaption>{screenshotLabels[index] ?? `View ${String(index + 1).padStart(2, "0")}`}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="sectionBlock projectInfoSection" aria-labelledby="project-info-title">
         <div className="sectionIntro">

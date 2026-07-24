@@ -15,8 +15,8 @@ const bodyFont = Montserrat({
 });
 
 export const metadata = {
-  title: "Bushra | Portfolio Theme Test",
-  description: "Navbar and banner theme test for Bushra's portfolio website.",
+  title: "Bushra | Full-Stack Developer Portfolio",
+  description: "Bushra's portfolio of full-stack web applications and product-focused development work.",
 };
 
 export default function RootLayout({ children }) {

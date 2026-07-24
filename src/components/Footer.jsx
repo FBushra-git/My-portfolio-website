@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="flex flex-col gap-5 !rounded-2xl border border-[var(--line)] bg-[color-mix(in_srgb,var(--surface)_72%,transparent)] p-6 shadow-[0_18px_50px_rgba(24,21,20,0.08)] backdrop-blur-xl md:flex-row md:items-center md:justify-between">
         <div>
           <a className="font-[var(--font-heading)] text-3xl font-semibold leading-none text-[var(--text)]" href="#home">Bushra</a>
-          <p className="mt-3 max-w-xl text-sm leading-6">MENN Stack Developer | CSE Student | Building clean, responsive, and useful web experiences.</p>
+          <p className="mt-3 max-w-xl text-sm leading-6">MERN Stack Developer | CSE Student | Building clean, responsive, and useful web experiences.</p>
         </div>
 
         <div className="flex flex-wrap gap-3" aria-label="Footer links">

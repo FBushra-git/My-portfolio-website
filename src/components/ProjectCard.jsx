@@ -1,4 +1,4 @@
-import { ArrowUpRight, Code2, ExternalLink } from "lucide-react";
+import { ArrowUpRight, Code2, ExternalLink, Server } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ export default function ProjectCard({ project, index, className = "" }) {
     <article className={`projectCard ${className}`}>
       <div className={`projectPreview${previewImage ? " imagePreview" : ""}`} aria-label={`${project.name} preview`}>
         {previewImage ? (
-          <Image src={previewImage} alt={`${project.name} preview`} width={720} height={480} />
+          <Image src={previewImage} alt={`${project.name} live-site preview`} width={720} height={500} />
         ) : (
           <>
             <span>{String(index + 1).padStart(2, "0")}</span>
@@ -35,9 +35,14 @@ export default function ProjectCard({ project, index, className = "" }) {
               <ExternalLink size={17} strokeWidth={1.8} aria-hidden="true" />
             </a>
           )}
-          <a className="repoButton" href={project.githubLink} target="_blank" rel="noreferrer" aria-label={`${project.name} GitHub repository`}>
+          <a className="repoButton" href={project.githubLink} target="_blank" rel="noreferrer" aria-label={`${project.name} client repository`}>
             <Code2 size={17} strokeWidth={1.8} aria-hidden="true" />
           </a>
+          {project.serverGithubLink && (
+            <a className="repoButton" href={project.serverGithubLink} target="_blank" rel="noreferrer" aria-label={`${project.name} server repository`}>
+              <Server size={17} strokeWidth={1.8} aria-hidden="true" />
+            </a>
+          )}
         </div>
       </div>
     </article>
